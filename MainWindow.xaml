@@ -30,24 +30,24 @@
         <StackPanel Grid.Row="0" MinWidth="64">
             <WrapPanel HorizontalAlignment="Center" Margin="5 0 5 5" >
                 <Label Content="串口号"/>
-                <ComboBox Width="144"  ItemsSource="{Binding AvailablePorts}" />
+                <ComboBox Width="144" IsEnabled="{Binding Sp.IsOpen}" SelectedIndex="{Binding Select_port_index}"  ItemsSource="{Binding AvailablePorts}" />
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center" Margin="5 0 5 5" >
                 <Label Content="波特率"/>
                 <ComboBox Width="144" />
             </WrapPanel>
             <WrapPanel Margin="5 0 5 0" HorizontalAlignment="Center" >
-                <Button Width="80" Margin="5">扫描串口</Button>
+                <Button Width="80" Margin="5" Command="{Binding update_available_portsCommand}" >扫描串口</Button>
                 <Button Width="80" Margin="5">连接串口</Button>
             </WrapPanel>
             <WrapPanel Margin="5 0 5 0" HorizontalAlignment="Left">
                 <Label Content="从机地址" />
-                <TextBox Text="FE" Width="64" VerticalAlignment="Center" Margin="5"></TextBox>
+                <TextBox Text="{Binding Slave_id, StringFormat=\{0:d\}, UpdateSourceTrigger=PropertyChanged}" Width="64" VerticalAlignment="Center" Margin="5" ></TextBox>
             </WrapPanel>
             <StackPanel>
                 <GroupBox Header="参数配置与否">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton Content="已配置" d:IsChecked="True" />
+                        <RadioButton Content="已配置" d:IsChecked="True"  />
                         <RadioButton Content="未配置"/>
                     </WrapPanel>
                 </GroupBox>
@@ -140,7 +140,7 @@
                 <Label Content="有毒" Grid.Row="2" Grid.Column="0"  />
                 <TextBox Text="无" Grid.Row="2" Grid.Column="1" />
                 <Label Content="高位报警启用" Grid.Row="3" Grid.Column="0"  />
-                <TextBox Text=" " Grid.Row="3" Grid.Column="1" />
+                <TextBox Text="---" Grid.Row="3" Grid.Column="1" />
                 <Label Content="低位报警启用" Grid.Row="4" Grid.Column="0"  />
                 <TextBox Text=" " Grid.Row="4" Grid.Column="1" />
                 <Label Content="正常区间" Grid.Row="5" Grid.Column="0"  />
@@ -187,5 +187,26 @@
         </GroupBox>
 
         <!--#endregion-->
+
+        <StackPanel 
+            Grid.Column="2" 
+            Background="Cyan"
+            Margin="5"
+            >
+            <GroupBox Header="实时数据" Margin="5" >
+                <StackPanel>
+                    <Label Content="浓度(浮点数):"/>
+                    <TextBox Text="---"/>
+                    <Label Content="浓度(整数*1000):"/>
+                    <TextBox Text="---"/>
+                    <Label Content="温度:"/>
+                    <TextBox Text="---"/>
+                </StackPanel>
+
+            </GroupBox>
+
+        </StackPanel>
+
+
     </Grid>
 </Window>
