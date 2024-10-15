@@ -4,16 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gas_sensor"
+        xmlns:vm="clr-namespace:gas_sensor.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow"
-        Height="450" MinHeight="450" MaxHeight="450"
-        Width="800" MouseDown="Window_MouseDown"
-        >
-    <Grid >
+        Height="480" MinHeight="480" MaxHeight="480"
+        Width="800">
+    <Window.DataContext>
+        <vm:mainViewModels/>
+    </Window.DataContext>
+
+    <Grid Height="435" VerticalAlignment="Top" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="491*"/>
-
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!--<Grid.RowDefinitions>
@@ -21,10 +25,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>-->
+
+        <!--#region 串口和状态数据 -->
         <StackPanel Grid.Row="0" MinWidth="64">
             <WrapPanel HorizontalAlignment="Center" Margin="5 0 5 5" >
                 <Label Content="串口号"/>
-                <ComboBox Width="144" />
+                <ComboBox Width="144"  ItemsSource="{Binding AvailablePorts}" />
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center" Margin="5 0 5 5" >
                 <Label Content="波特率"/>
@@ -93,6 +99,93 @@
 
 
         </StackPanel>
+        <!--#endregion-->
 
+        <!--#region 气体参数 -->
+        <GroupBox Grid.Column="1" Background="Cyan" Margin="5" Header="气体参数">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+
+                </Grid.RowDefinitions>
+                <Grid.Resources >
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="5 1 5 1"/>
+                    </Style>
+                </Grid.Resources>
+                <Label Content="气体类型" Grid.Row="0" Grid.Column="0"  />
+                <TextBox Text="O2" Grid.Row="0" Grid.Column="1"/>
+                <Label Content="通道号" Grid.Row="1" Grid.Column="0"  />
+                <TextBox Text="1" Grid.Row="1" Grid.Column="1" />
+                <Label Content="有毒" Grid.Row="2" Grid.Column="0"  />
+                <TextBox Text="无" Grid.Row="2" Grid.Column="1" />
+                <Label Content="高位报警启用" Grid.Row="3" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="3" Grid.Column="1" />
+                <Label Content="低位报警启用" Grid.Row="4" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="4" Grid.Column="1" />
+                <Label Content="正常区间" Grid.Row="5" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="5" Grid.Column="1" />
+                <Label Content="显示分辨率" Grid.Row="6" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="6" Grid.Column="1" />
+                <Label Content="气体全量程" Grid.Row="7" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="7" Grid.Column="1" />
+                <Label Content="气体全量程" Grid.Row="7" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="7" Grid.Column="1"  />
+                <Label Content="物理单位" Grid.Row="8" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="8" Grid.Column="1"  />
+                <Label Content="高报警值" Grid.Row="9" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="9" Grid.Column="1"  />
+                <Label Content="低报警值" Grid.Row="10" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="10" Grid.Column="1"  />
+                <Label Content="初始化时间长度" Grid.Row="11" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="11" Grid.Column="1"  />
+                <Label Content="归零值启用" Grid.Row="12" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="12" Grid.Column="1"  />
+                <Label Content="气体零点值" Grid.Row="13" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="13" Grid.Column="1"  />
+                <Label Content="显示归零值" Grid.Row="14" Grid.Column="0"  />
+                <TextBox Text=" " Grid.Row="14" Grid.Column="1"  />
+            </Grid>
+            <!--<StackPanel >
+                <StackPanel Orientation="Horizontal" Margin="5 1 5 1">
+                    <Label Content="气体类型"/>
+                    <TextBox Text="hahah"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5 1 5 1">
+                    <Label Content="通道号"/>
+                    <TextBox Text="hahah"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5 1 5 1">
+                    <Label Content="有毒"/>
+                    <TextBox Text="hahah"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5 1 5 1">
+                    <Label Content="高报警启用"/>
+                    <TextBox Text="hahah" HorizontalAlignment="Right" />
+                </StackPanel>
+            </StackPanel>-->
+        </GroupBox>
+
+        <!--#endregion-->
     </Grid>
 </Window>
