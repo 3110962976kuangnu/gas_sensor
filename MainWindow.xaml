@@ -15,6 +15,7 @@
     </Window.DataContext>
     <Window.Resources>
         <cv:HEXtoStrConverter x:Key="HEXtoStrConverter"/>
+        <cv:BooleanToInverseConverter x:Key="BooleanToInverseConverter"/>
     </Window.Resources>
 
     <Grid Height="435" VerticalAlignment="Top" >
@@ -38,7 +39,8 @@
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Center" Margin="5 0 5 5" >
                 <Label Content="波特率"/>
-                <ComboBox Width="144" />
+                <ComboBox Width="144" SelectedIndex="{Binding Select_baud_index}"
+                          ItemsSource="{Binding AvailableBaudRates}"/>
             </WrapPanel>
             <WrapPanel Margin="5 0 5 0" HorizontalAlignment="Center" >
                 <Button Width="80" Margin="5" Command="{Binding update_available_portsCommand}" >扫描串口</Button>
@@ -51,50 +53,51 @@
             <StackPanel>
                 <GroupBox Header="参数配置与否">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton Content="已配置" d:IsChecked="True"  />
-                        <RadioButton Content="未配置"/>
+                        <RadioButton GroupName="参数已配置" Content="已配置" d:IsChecked="True" IsChecked="{Binding IsAllredayConfig, Mode=OneWay}"  />
+                        <RadioButton GroupName="参数已配置" Content="未配置"
+                          IsChecked="{Binding IsAllredayConfig , Mode=OneWay, Converter={StaticResource BooleanToInverseConverter} }"            />
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="预热是否已完成">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton Content="已完成" d:IsChecked="True" />
-                        <RadioButton Content="未完成"/>
+                        <RadioButton GroupName="预热已完成" Content="已完成" d:IsChecked="True" />
+                        <RadioButton GroupName="预热已完成" Content="未完成"/>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="传感器是否故障">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton Content="正常  " d:IsChecked="True" />
-                        <RadioButton Content="有故障"/>
+                        <RadioButton GroupName="传感器有故障" Content="正常  " d:IsChecked="True" />
+                        <RadioButton GroupName="传感器有故障" Content="有故障"/>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="温度补偿数据是否写入">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton Content="已写入" d:IsChecked="True" />
-                        <RadioButton Content="未写入"/>
+                        <RadioButton GroupName="温度补偿" Content="已写入" d:IsChecked="True" />
+                        <RadioButton GroupName="温度补偿" Content="未写入"/>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="标零数据是否写入">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton Content="已写入" d:IsChecked="True" />
-                        <RadioButton Content="未写入"/>
+                        <RadioButton GroupName="标定零" Content="已写入" d:IsChecked="True" />
+                        <RadioButton GroupName="标定零" Content="未写入"/>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="标气数据是否写入">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton Content="已写入" d:IsChecked="True" />
-                        <RadioButton Content="未写入"/>
+                        <RadioButton GroupName="标定气" Content="已写入" d:IsChecked="True" />
+                        <RadioButton GroupName="标定气" Content="未写入"/>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="是否处于高位报警状态">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton Content="已报警" d:IsChecked="True" />
-                        <RadioButton Content="未报警"/>
+                        <RadioButton GroupName="高位报警" Content="已报警" d:IsChecked="True" />
+                        <RadioButton GroupName="高位报警" Content="未报警"/>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="是否处于低位报警状态">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton Content="已报警" d:IsChecked="True" />
-                        <RadioButton Content="未报警"/>
+                        <RadioButton GroupName="地位报警" Content="已报警" d:IsChecked="True" />
+                        <RadioButton GroupName="地位报警" Content="未报警"/>
                     </WrapPanel>
                 </GroupBox>
             </StackPanel>
@@ -200,9 +203,9 @@
             <GroupBox Header="实时数据" Margin="5" >
                 <StackPanel>
                     <Label Content="浓度(浮点数):"/>
-                    <TextBox Text="---"/>
+                    <TextBox Text="{Binding Gas_float_value, Mode=OneWay}"/>
                     <Label Content="浓度(整数*1000):"/>
-                    <TextBox Text="---"/>
+                    <TextBox Text="{Binding Gas_int_value, Mode=OneWay}"/>
                     <Label Content="温度:"/>
                     <TextBox Text="---"/>
                 </StackPanel>
