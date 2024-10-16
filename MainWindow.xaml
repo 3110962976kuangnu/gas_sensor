@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gas_sensor"
         xmlns:vm="clr-namespace:gas_sensor.ViewModel"
+        xmlns:cv="clr-namespace:gas_sensor.Converters"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="480" MinHeight="480" MaxHeight="480"
@@ -12,6 +13,9 @@
     <Window.DataContext>
         <vm:mainViewModels/>
     </Window.DataContext>
+    <Window.Resources>
+        <cv:HEXtoStrConverter x:Key="HEXtoStrConverter"/>
+    </Window.Resources>
 
     <Grid Height="435" VerticalAlignment="Top" >
         <Grid.ColumnDefinitions>
@@ -42,7 +46,7 @@
             </WrapPanel>
             <WrapPanel Margin="5 0 5 0" HorizontalAlignment="Left">
                 <Label Content="从机地址" />
-                <TextBox Text="{Binding Slave_id, StringFormat=\{0:d\}, UpdateSourceTrigger=PropertyChanged}" Width="64" VerticalAlignment="Center" Margin="5" ></TextBox>
+                <TextBox Text="{Binding Slave_id, Converter={StaticResource HEXtoStrConverter}, StringFormat=0x\{0:d\}}" Width="64" VerticalAlignment="Center" Margin="5" ></TextBox>
             </WrapPanel>
             <StackPanel>
                 <GroupBox Header="参数配置与否">
@@ -142,7 +146,7 @@
                 <Label Content="高位报警启用" Grid.Row="3" Grid.Column="0"  />
                 <TextBox Text="---" Grid.Row="3" Grid.Column="1" />
                 <Label Content="低位报警启用" Grid.Row="4" Grid.Column="0"  />
-                <TextBox Text=" " Grid.Row="4" Grid.Column="1" />
+                <TextBox Text="{Binding Slave_id, StringFormat=\{0:D\}}" Grid.Row="4" Grid.Column="1" />
                 <Label Content="正常区间" Grid.Row="5" Grid.Column="0"  />
                 <TextBox Text=" " Grid.Row="5" Grid.Column="1" />
                 <Label Content="显示分辨率" Grid.Row="6" Grid.Column="0"  />
