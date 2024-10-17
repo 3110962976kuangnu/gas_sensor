@@ -60,44 +60,58 @@
                 </GroupBox>
                 <GroupBox Header="预热是否已完成">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton GroupName="预热已完成" Content="已完成" d:IsChecked="True" />
-                        <RadioButton GroupName="预热已完成" Content="未完成"/>
+                        <RadioButton GroupName="预热已完成" Content="已完成" d:IsChecked="True"
+                             IsChecked="{Binding Is_powerOn_init , Mode=OneWay }"         />
+                        <RadioButton GroupName="预热已完成" Content="未完成"
+                              IsChecked="{Binding Is_powerOn_init , Mode=OneWay, Converter={StaticResource BooleanToInverseConverter} }"        />
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="传感器是否故障">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton GroupName="传感器有故障" Content="正常  " d:IsChecked="True" />
-                        <RadioButton GroupName="传感器有故障" Content="有故障"/>
+                        <RadioButton GroupName="传感器有故障" Content="正常  " d:IsChecked="True" 
+                           IsChecked="{Binding Is_sensor_ok , Mode=OneWay}"               />
+                        <RadioButton GroupName="传感器有故障" Content="有故障"
+                           IsChecked="{Binding Is_sensor_ok , Mode=OneWay, Converter={StaticResource BooleanToInverseConverter} }"               />
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="温度补偿数据是否写入">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton GroupName="温度补偿" Content="已写入" d:IsChecked="True" />
-                        <RadioButton GroupName="温度补偿" Content="未写入"/>
+                        <RadioButton GroupName="温度补偿" Content="已写入" d:IsChecked="True"
+                           IsChecked="{Binding Is_Temperature_concentration_config , Mode=OneWay}"             />
+                        <RadioButton GroupName="温度补偿" Content="未写入"
+                           IsChecked="{Binding Is_Temperature_concentration_config , Mode=OneWay,Converter={StaticResource  BooleanToInverseConverter} }"/>
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="标零数据是否写入">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton GroupName="标定零" Content="已写入" d:IsChecked="True" />
-                        <RadioButton GroupName="标定零" Content="未写入"/>
+                        <RadioButton GroupName="标定零" Content="已写入" d:IsChecked="True" 
+                          IsChecked="{Binding Is_bd0_config , Mode=OneWay}"           />
+                        <RadioButton GroupName="标定零" Content="未写入"
+                          IsChecked="{Binding Is_bd0_config , Mode=OneWay,Converter={StaticResource  BooleanToInverseConverter} }"           />
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="标气数据是否写入">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton GroupName="标定气" Content="已写入" d:IsChecked="True" />
-                        <RadioButton GroupName="标定气" Content="未写入"/>
+                        <RadioButton GroupName="标定气" Content="已写入" d:IsChecked="True"
+                          IsChecked="{Binding Is_bd1_config , Mode=OneWay }"           />
+                        <RadioButton GroupName="标定气" Content="未写入"
+                           IsChecked="{Binding Is_bd1_config , Mode=OneWay,Converter={StaticResource  BooleanToInverseConverter} }"          />
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="是否处于高位报警状态">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton GroupName="高位报警" Content="已报警" d:IsChecked="True" />
-                        <RadioButton GroupName="高位报警" Content="未报警"/>
+                        <RadioButton GroupName="高位报警" Content="已报警" d:IsChecked="True"
+                           IsChecked="{Binding Is_alarm1_triggered , Mode=OneWay }"          />
+                        <RadioButton GroupName="高位报警" Content="未报警"
+                          IsChecked="{Binding Is_alarm1_triggered , Mode=OneWay,Converter={StaticResource  BooleanToInverseConverter} }"           />
                     </WrapPanel>
                 </GroupBox>
                 <GroupBox Header="是否处于低位报警状态">
                     <WrapPanel IsHitTestVisible="False">
-                        <RadioButton GroupName="地位报警" Content="已报警" d:IsChecked="True" />
-                        <RadioButton GroupName="地位报警" Content="未报警"/>
+                        <RadioButton GroupName="地位报警" Content="已报警" d:IsChecked="True"
+                          IsChecked="{Binding Is_alarm1_triggered , Mode=OneWay }"           />
+                        <RadioButton GroupName="地位报警" Content="未报警"
+                           IsChecked="{Binding Is_alarm1_triggered , Mode=OneWay,Converter={StaticResource  BooleanToInverseConverter} }"          />
                     </WrapPanel>
                 </GroupBox>
             </StackPanel>
@@ -207,7 +221,7 @@
                     <Label Content="浓度(整数*1000):"/>
                     <TextBox Text="{Binding Gas_int_value, Mode=OneWay}"/>
                     <Label Content="温度:"/>
-                    <TextBox Text="---"/>
+                    <TextBox Text="---" />
                 </StackPanel>
 
             </GroupBox>
